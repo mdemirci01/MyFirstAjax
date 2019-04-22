@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MyFirstAjax.Data;
 using MyFirstAjax.Models;
 
@@ -28,7 +29,9 @@ namespace MyFirstAjax.Controllers
 
         public IActionResult Contact()
         {
-            return View();
+            var feedback = new Feedback();
+            ViewBag.Countries = new SelectList(db.Countries.ToList(),"Id","Name", feedback.CountryId);
+            return View(feedback);
         }
 
         [HttpPost]
@@ -40,6 +43,7 @@ namespace MyFirstAjax.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.Countries = new SelectList(db.Countries.ToList(), "Id", "Name", feedback.CountryId);
             return View();
         }
 

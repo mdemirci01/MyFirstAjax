@@ -15,5 +15,6 @@ namespace MyFirstAjax.Data
         }
 
         public virtual DbSet<Feedback> Feedbacks { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
     }
 }
