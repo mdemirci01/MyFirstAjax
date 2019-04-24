@@ -27,10 +27,16 @@ namespace MyFirstAjax.Controllers
             return View();
         }
 
+        public IActionResult GetCitiesByCountryId(int countryId)
+        {
+            return Json(db.Cities.Where(c => c.CountryId == countryId).ToList());
+        }
+
         public IActionResult Contact()
         {
             var feedback = new Feedback();
             ViewBag.Countries = new SelectList(db.Countries.ToList(),"Id","Name", feedback.CountryId);
+            ViewBag.Cities = new SelectList(db.Cities.Where(c => c.CountryId == feedback.CountryId).ToList(), "Id", "Name", feedback.CityId);
             return View(feedback);
         }
 
@@ -44,6 +50,7 @@ namespace MyFirstAjax.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.Countries = new SelectList(db.Countries.ToList(), "Id", "Name", feedback.CountryId);
+            ViewBag.Cities = new SelectList(db.Cities.Where(c => c.CountryId == feedback.CountryId).ToList(), "Id", "Name", feedback.CityId);
             return View();
         }
 

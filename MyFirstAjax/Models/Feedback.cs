@@ -26,10 +26,14 @@ namespace MyFirstAjax.Models
         [Required]
         [Display(Name = "Telefon")]
         public string Phone { get; set; }
-
+        [Display(Name = "Ülke")]
         public int? CountryId { get; set; }
         [ForeignKey("CountryId")]
         public virtual Country Country { get; set; }
+        [Display(Name = "Şehir")]
+        public int? CityId { get; set; }
+        [ForeignKey("CityId")]
+        public virtual City City { get; set; }
 
         [StringLength(100)]
         [Required]
